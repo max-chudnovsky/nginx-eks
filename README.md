@@ -1,24 +1,33 @@
-Terraform Module that sets up an EKS cluster and deploys NGINX with load balancer.
+# Description
+Terraform Module that sets up an EKS cluster and deploys NGINX with a load balancer.
 
-### Setup terraform to ensure your AWS credentuals point to IAM Role that has access to deployment and management of EKS cluster.
+# Prerequisites
+- terraform
+- aws-cli
+- Set up Terraform to ensure your AWS credentials point to an IAM Role that has access to deployment and management of the EKS cluster, creation of VPC, spinning EC2, etc.
 
-Action	IAM Permissions Needed (AWS Managed Policies)
+# Installation
 ```
-EKS cluster management	AmazonEKSClusterPolicy, AmazonEKSServicePolicy, AmazonEC2FullAccess, IAMFullAccess, AutoScalingFullAccess, ElasticLoadBalancingFullAccess
-Deploy to EKS with kubectl	eks:DescribeCluster, sts:GetCallerIdentity + mapped to Kubernetes admin group (system:masters or cluster-admin)
+git clone https://github.com/max-chudnovsky/nginx-eks.git
+cd nginx-eks
+terraform init
 ```
-# git clone repository
-# terraform init
-# modify variables.tf and terraform.tfvars if so desire.  optional.
-# terraform apply
+- OPTIONAL.  Modify variables.tf and terraform.tfvars if so desired
+  
+```terraform apply```
 
-# test
+# Test
 ```
+# Let's point our kubectl to our new cluster
 max@master:~/terraform/hiive-test$ aws eks update-kubeconfig --region us-east-1 --name hiive-test
 Updated context arn:aws:eks:us-east-1:409367258773:cluster/hiive-test in /home/max/.kube/config
+
+# Let's get our load balancer's IP addr
 max@master:~/terraform/hiive-test$ kubectl get svc nginx
 NAME    TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
 nginx   LoadBalancer   172.20.250.178   afceffcfa4fe04aafa6ee441086514d1-988735755.us-east-1.elb.amazonaws.com   80:30502/TCP   2m6s
+
+# Finally, lets hit the default web page
 max@master:~/terraform/hiive-test$ curl afceffcfa4fe04aafa6ee441086514d1-988735755.us-east-1.elb.amazonaws.com
 <!DOCTYPE html>
 <html>
