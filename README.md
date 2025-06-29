@@ -22,7 +22,7 @@ Terraform Module that sets up an EKS cluster and deploys NGINX with a load balan
 max@master:~/terraform/hiive-test$ aws eks update-kubeconfig --region us-east-1 --name hiive-test
 Updated context arn:aws:eks:us-east-1:409367258773:cluster/hiive-test in /home/max/.kube/config
 
-# Let's get our load balancer's IP addr
+# Let's get our load balancer's public addr
 max@master:~/terraform/hiive-test$ kubectl get svc nginx
 NAME    TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
 nginx   LoadBalancer   172.20.250.178   afceffcfa4fe04aafa6ee441086514d1-988735755.us-east-1.elb.amazonaws.com   80:30502/TCP   2m6s
