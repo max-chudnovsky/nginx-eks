@@ -4,17 +4,17 @@ Terraform Module that sets up an EKS cluster and deploys NGINX with a load balan
 # Prerequisites
 - terraform
 - aws-cli
+- kubectl
 - Set up Terraform to ensure your AWS credentials point to an IAM Role that has access to deployment and management of the EKS cluster, creation of VPC, spinning EC2, etc.
 
 # Installation
 ```
-git clone https://github.com/max-chudnovsky/nginx-eks.git
-cd nginx-eks
-terraform init
+# git clone https://github.com/max-chudnovsky/nginx-eks.git
+# cd nginx-eks
+# terraform init
+  OPTIONAL.  Modify variables.tf and terraform.tfvars if so desired
+# terraform apply
 ```
-- OPTIONAL.  Modify variables.tf and terraform.tfvars if so desired
-  
-```terraform apply```
 
 # Test
 ```
