@@ -1,5 +1,5 @@
 provider "aws" {
-  region = local.region
+  region = var.region
 }
 
 data "aws_availability_zones" "available" {
@@ -11,19 +11,12 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  # Local variables for the VPC and EKS cluster
-  name   = "hiive-test"
-  region = "us-east-1"
+  name   = var.name
+  region = var.region
 
-  # VPC configuration
-  vpc_cidr = "10.0.0.0/16"
+  vpc_cidr = var.vpc_cidr
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
-
-  tags = {
-    Example    = local.name
-    GithubRepo = "terraform-aws-eks"
-    GithubOrg  = "terraform-aws-modules"
-  }
+  tags     = var.tags
 }
 
 ################################################################################

@@ -1,3 +1,4 @@
+### This config assumes you have an EKS cluster set up with the necessary permissions and access and deploys an Nginx application.
 data "aws_eks_cluster_auth" "this" {
   name = module.eks.cluster_name
 }
@@ -8,6 +9,7 @@ provider "kubernetes" {
   token                  = data.aws_eks_cluster_auth.this.token
 }
 
+# NGINX Deployment of pods
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "nginx"
@@ -41,6 +43,7 @@ resource "kubernetes_deployment" "nginx" {
   }
 }
 
+# NGINX Service to expose the deployment
 resource "kubernetes_service" "nginx" {
   metadata {
     name = "nginx"
