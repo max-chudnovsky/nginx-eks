@@ -1,16 +1,19 @@
-# Setup terraform to ensure your AWS credentuals point to IAM Role that has access to deployment and management of EKS cluster.
+Terraform Module that sets up an EKS cluster and deploys NGINX with load balancer.
+
+### Setup terraform to ensure your AWS credentuals point to IAM Role that has access to deployment and management of EKS cluster.
 
 Action	IAM Permissions Needed (AWS Managed Policies)
+```
 EKS cluster management	AmazonEKSClusterPolicy, AmazonEKSServicePolicy, AmazonEC2FullAccess, IAMFullAccess, AutoScalingFullAccess, ElasticLoadBalancingFullAccess
 Deploy to EKS with kubectl	eks:DescribeCluster, sts:GetCallerIdentity + mapped to Kubernetes admin group (system:masters or cluster-admin)
-
+```
 # git clone repository
-
 # terraform init
 # modify variables.tf and terraform.tfvars if so desire.  optional.
 # terraform apply
 
 # test
+```
 max@master:~/terraform/hiive-test$ aws eks update-kubeconfig --region us-east-1 --name hiive-test
 Updated context arn:aws:eks:us-east-1:409367258773:cluster/hiive-test in /home/max/.kube/config
 max@master:~/terraform/hiive-test$ kubectl get svc nginx
@@ -40,3 +43,4 @@ Commercial support is available at
 <p><em>Thank you for using nginx.</em></p>
 </body>
 </html>
+```
