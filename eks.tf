@@ -12,8 +12,9 @@ module "eks" {
   cluster_endpoint_private_access = true
   enable_cluster_creator_admin_permissions = true
 
-  # IAM role for the EKS cluster.  only enable if your user does not have right permissions.  Replace ARN with yours.
-  # access_entries = {
+  # IAM role for the EKS cluster.  Do not use it together with line above (enable_cluster_creator_admin_permissions).  
+  # only enable if your user does not have right permissions.  Replace ARN with yours.
+  #access_entries = {
   #  eks_admin = {
   #    principal_arn     = "arn:aws:iam::409367258773:user/terraform"
   #    kubernetes_groups = ["cluster-admin"]
